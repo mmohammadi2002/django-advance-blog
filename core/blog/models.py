@@ -1,6 +1,10 @@
 from django.db import models
-
+from django.contrib.auth import get_user_model
 # Create your models here.
+
+# getting user model objects
+User = get_user_model()
+
 class Post(models.Model):
     '''
     This is a class to define posts for blog app
@@ -14,7 +18,7 @@ class Post(models.Model):
 
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
-    published_date = models.DateTimeField
+    published_date = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return self.title
