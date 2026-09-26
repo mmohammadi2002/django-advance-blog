@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>blog posts</h1>
+    <ol>
+        {% for post in posts %}
+            <li>
+               <a href="{% url 'blog:post-detail' pk=post.id %}"><h2>{{post.id}} - {{post.title}}</h2></a>
+               <a href="{% url 'blog:post-edit' pk=post.id %}"><h5>edit</h2></a>
+               <a href="{% url 'blog:post-delete' pk=post.id %}"><h5>delete</h5></a>
+                <small>{{post.author}} - {{post.published_date}}</small>
+            </li>
+        {% endfor %}
+    </ol>
+
+    {% if is_paginated %}
+  <div class="pagination">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">Next</a>
+    {% endif %}
+  </div>
+{% endif %}
+        
+        
+</body>
+</html>
